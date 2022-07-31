@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 
 type HeaderProps = {
-  title: string;
+  title?: string;
 };
 
 export const Header: React.FC<HeaderProps> = ({ title }) => (
