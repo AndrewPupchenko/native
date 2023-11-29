@@ -1,37 +1,31 @@
-import { FC, useState } from "react"
-import { FlatList, Text, TextInput, View } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import { Header } from "../../shared/components/header"
+import { FC } from "react"
+import { FlatList, StyleSheet, View } from "react-native"
 import { useLocalStorage } from "../../shared/hooks/use-local-storage"
+import { InputItem } from "./components/InputItem"
+import { ListItem } from "./components/ListItem"
 
 export const HomeScreen: FC = () => {
   const { data, writeItemToStorage } = useLocalStorage("home")
-  const [inputText, setInputText] = useState<string>("")
-
   return (
-    <View>
-      <Header title={data?.storage_key} />
+    <View style={styles.container}>
       <FlatList
+        style={styles.list}
         data={data?.value}
-        renderItem={({ item }) => <Text key={item.id}>{item.label}</Text>}
+        renderItem={ListItem}
+        inverted
       />
-      <TextInput
-        style={{ height: 40 }}
-        placeholder="Type here to create label"
-        onChangeText={setInputText}
-        defaultValue={inputText}
-        value={inputText}
-      />
-      <TouchableOpacity
-        onPress={() =>
-          writeItemToStorage({ value: inputText, label: inputText })
-        }
-        style={{ backgroundColor: "red" }}
-      >
-        <Text>Update value</Text>
-      </TouchableOpacity>
+      <InputItem writeItemToStorage={writeItemToStorage} />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+  list: {
+    marginBottom: 100,
+  },
+})
 
 export default HomeScreen

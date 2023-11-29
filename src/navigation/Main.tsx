@@ -4,24 +4,19 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { FC } from "react"
 import { AboutScreen } from "../screens/about/about-screen"
-import AutorisationScreen from "../screens/autorisation/autorisation-screen"
 import { HomeScreen } from "../screens/home/home-screen"
 
 const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
 const Tab = createBottomTabNavigator()
 
-const DrawerScreen = () => {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="About" component={AboutScreen} />
-      <Drawer.Screen name="AutorisationScreen" component={AutorisationScreen} />
-
-      {/* <Stack.Screen name="Settings" component={Settings} /> */}
-    </Drawer.Navigator>
-  )
-}
+const DrawerScreen = () => (
+  <Drawer.Navigator>
+    <Drawer.Screen name="Home" component={HomeScreen} />
+    <Drawer.Screen name="About" component={AboutScreen} />
+    {/* <Stack.Screen name="Settings" component={Settings} /> */}
+  </Drawer.Navigator>
+)
 
 export const MainNavigator: FC = () => (
   <NavigationContainer>
