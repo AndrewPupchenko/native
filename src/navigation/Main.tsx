@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator()
 
 const DrawerScreen = () => (
   <Drawer.Navigator>
-    <Drawer.Screen name="Home" component={HomeScreen} />
+    <Drawer.Screen name="Your list" component={HomeScreen} />
     <Drawer.Screen name="About" component={AboutScreen} />
     {/* <Stack.Screen name="Settings" component={Settings} /> */}
   </Drawer.Navigator>

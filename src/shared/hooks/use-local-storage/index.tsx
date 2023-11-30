@@ -1,19 +1,20 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage"
 import { useCallback, useEffect, useState } from "react"
+import { dateFormatter } from "../../utils/date-formatter"
 
-export type VauleType = {
+export type ValueType = {
   label: string
   value?: string
   checked?: boolean
-  createdDate?: Date
+  createdDate?: string
 }
-export type OutPutVauleType = VauleType & { id: number }
+export type OutPutValueType = ValueType & { id: number }
 
-type StorageStucture = { storage_key: string; value: OutPutVauleType[] }
+type StorageStucture = { storage_key: string; value: OutPutValueType[] }
 
 export const useLocalStorage = (storage_key: string) => {
   const [data, setData] = useState<StorageStucture | null>(null)
-  const { getItem, setItem, removeItem } = useAsyncStorage(storage_key)
+  const { getItem, setItem } = useAsyncStorage(storage_key)
 
   const readItemFromStorage = useCallback(async () => {
     const item = await getItem()
@@ -21,14 +22,14 @@ export const useLocalStorage = (storage_key: string) => {
   }, [setData, getItem])
 
   const writeItemToStorage = useCallback(
-    async (newValue: VauleType) => {
-      const old_values = data?.value || []
-      const combined_array: OutPutVauleType[] = [
+    async (newValue: ValueType) => {
+      const old_values = data?.value ?? []
+      const combined_array: OutPutValueType[] = [
         ...old_values,
         {
           ...newValue,
           id: Math.random(),
-          createdDate: new Date(),
+          createdDate: dateFormatter(new Date()),
         },
       ]
       const combined_value: StorageStucture = {
@@ -54,9 +55,28 @@ export const useLocalStorage = (storage_key: string) => {
     setData(null)
   }, [setItem, setData])
 
+  const deleteItem = useCallback(
+    (id: number) => async () => {
+      const combined_value: StorageStucture = {
+        storage_key,
+        value: data?.value.filter((el) => el.id !== id) ?? [],
+      }
+
+      await setItem(JSON.stringify(combined_value))
+      setData(combined_value)
+    },
+    [setItem, setData]
+  )
+
   useEffect(() => {
     readItemFromStorage()
   }, [])
 
-  return { readItemFromStorage, writeItemToStorage, clearStorage, data }
+  return {
+    readItemFromStorage,
+    writeItemToStorage,
+    clearStorage,
+    deleteItem,
+    data,
+  }
 }
