@@ -44,10 +44,6 @@ If necessary, you can configure other project parameters according to your needs
 
 ## License
 
-This project is distributed under the [MIT License](LICENSE).
-
----
-
 **Author:** Andrey Pupchenko
 **Contact:** andrew.pupchenko@gmail.com
 
