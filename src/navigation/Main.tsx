@@ -1,22 +1,20 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { darkTheme, defaultTheme } from "@shared/constant"
+import { LocalStorageProvider } from "@shared/provider/list-provider"
 import { FC } from "react"
 import { Appearance } from "react-native"
-import { AboutScreen } from "../screens/about/about-screen"
-import { HomeScreen } from "../screens/home/home-screen"
+import { PagesList } from "./pages-list"
 
 const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
-const Tab = createBottomTabNavigator()
 
 const DrawerScreen = () => (
   <Drawer.Navigator>
-    <Drawer.Screen name="Your list" component={HomeScreen} />
-    <Drawer.Screen name="About" component={AboutScreen} />
-    {/* <Stack.Screen name="Settings" component={Settings} /> */}
+    {PagesList.map((el) => (
+      <Drawer.Screen key={el.name} {...el} />
+    ))}
   </Drawer.Navigator>
 )
 
@@ -27,13 +25,15 @@ export const MainNavigator: FC = () => {
     <NavigationContainer
       theme={colorScheme === "dark" ? darkTheme : defaultTheme}
     >
-      <Stack.Navigator>
-        <Stack.Screen
-          name="DrawerScreen"
-          component={DrawerScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+      <LocalStorageProvider>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="DrawerScreen"
+            component={DrawerScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </LocalStorageProvider>
     </NavigationContainer>
   )
 }

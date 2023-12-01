@@ -4,15 +4,12 @@ import { Linking } from "react-native"
 export const sendEmail = async (
   to: string,
   subject: string,
-  body: string,
-  options: { cc?: string; bcc?: string } = {}
+  body: string
 ): Promise<void> => {
-  const { cc, bcc } = options
-
   let url = `mailto:${to}`
 
   // Create email link query
-  const query = qs.stringify({ subject, body, cc, bcc })
+  const query = qs.stringify({ subject, body })
 
   if (query.length) url += `?${query}`
 

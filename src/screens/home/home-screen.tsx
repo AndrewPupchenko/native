@@ -1,17 +1,17 @@
+import { useLocalStorage } from "@shared/provider/list-provider"
 import { FC } from "react"
 import { FlatList, StyleSheet, View } from "react-native"
-import { useLocalStorage } from "@shared/hooks"
 import { InputItem } from "./components/input-item"
 import { ListItem } from "./components/list-item"
 
 export const HomeScreen: FC = () => {
-  const { data, writeItemToStorage, deleteItem } = useLocalStorage("home")
+  const { value, writeItemToStorage, deleteItem } = useLocalStorage()
 
   return (
     <View style={styles?.container}>
       <FlatList
         style={styles?.list}
-        data={data?.value}
+        data={value}
         contentContainerStyle={{ gap: 5 }}
         renderItem={({ item, index }) => (
           <ListItem index={index} item={item} onSwipe={deleteItem(item?.id)} />
