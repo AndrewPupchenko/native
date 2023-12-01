@@ -1,9 +1,9 @@
+import { useTheme } from "@react-navigation/native"
+import { OutPutValueType } from "@shared/hooks/use-local-storage"
 import { Animated, StyleSheet } from "react-native"
 import { Text } from "react-native-animatable"
 import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler"
-import { OutPutValueType } from "../../../../shared/hooks/use-local-storage"
 import { DeleteAction } from "./delete-action"
-import { theme } from "../../../../shared"
 
 type ListItemProps = {
   index: number
@@ -11,27 +11,38 @@ type ListItemProps = {
   onSwipe: () => void
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ index, item, onSwipe }) => (
-  <Swipeable
-    renderLeftActions={DeleteAction("left")}
-    renderRightActions={DeleteAction("right")}
-    onSwipeableOpen={onSwipe}
-  >
-    <GestureHandlerRootView>
-      <Animated.View style={styles.container} key={item.id}>
-        <Text style={styles.index}>{index + 1}</Text>
-        <Text style={styles.label}>{item.label}</Text>
-        <Text style={styles.date}>{item?.createdDate}</Text>
-      </Animated.View>
-    </GestureHandlerRootView>
-  </Swipeable>
-)
+export const ListItem: React.FC<ListItemProps> = ({ index, item, onSwipe }) => {
+  const theme = useTheme()
+
+  return (
+    <Swipeable
+      renderLeftActions={() => <DeleteAction alignItems="flex-start" />}
+      renderRightActions={() => <DeleteAction alignItems="flex-end" />}
+      onSwipeableOpen={onSwipe}
+    >
+      <GestureHandlerRootView>
+        <Animated.View
+          style={[
+            styles.container,
+            {
+              borderBottomColor: theme.colors.border,
+              backgroundColor: theme.colors.background,
+            },
+          ]}
+          key={item.id}
+        >
+          <Text style={[styles.index]}>{index + 1}</Text>
+          <Text style={[styles.label]}>{item.label}</Text>
+          <Text style={[styles.date]}>{item?.createdDate}</Text>
+        </Animated.View>
+      </GestureHandlerRootView>
+    </Swipeable>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    borderBottomColor: theme.primary.main,
-    backgroundColor: theme.background.main,
     borderBottomWidth: 2,
   },
   index: {

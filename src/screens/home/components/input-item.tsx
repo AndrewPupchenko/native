@@ -1,8 +1,9 @@
 import { useCallback } from "react"
 import { StyleSheet, TextInput } from "react-native"
 import { View } from "react-native-animatable"
-import { ValueType } from "../../../shared/hooks/use-local-storage"
+import { ValueType } from "@shared/hooks/use-local-storage"
 import { useInputList } from "../hooks/use-input-list"
+import { useTheme } from "@react-navigation/native"
 
 type InputItemProps = {
   writeItemToStorage: (newValue: ValueType) => void
@@ -10,6 +11,7 @@ type InputItemProps = {
 
 export const InputItem: React.FC<InputItemProps> = ({ writeItemToStorage }) => {
   const { inputText, setInputText, cleanInput } = useInputList()
+  const theme = useTheme()
 
   const handleCreate = useCallback(() => {
     writeItemToStorage({ value: inputText, label: inputText })
@@ -19,10 +21,10 @@ export const InputItem: React.FC<InputItemProps> = ({ writeItemToStorage }) => {
   }, [writeItemToStorage, cleanInput])
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { borderColor: theme.colors.border }]}>
       <TextInput
-        style={styles.input}
-        placeholder="Type here to create new item"
+        style={[styles.input]}
+        placeholder="Type here to create new item..."
         onChangeText={setInputText}
         defaultValue={inputText}
         value={inputText}
@@ -34,7 +36,6 @@ export const InputItem: React.FC<InputItemProps> = ({ writeItemToStorage }) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: "gray",
     borderWidth: 1,
 
     marginHorizontal: 5,
