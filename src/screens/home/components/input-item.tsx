@@ -1,9 +1,9 @@
+import { useTheme } from "@react-navigation/native"
+import { ValueType } from "@shared/provider"
 import { useCallback } from "react"
 import { StyleSheet, TextInput } from "react-native"
 import { View } from "react-native-animatable"
-import { ValueType } from "@shared/hooks/use-local-storage"
 import { useInputList } from "../hooks/use-input-list"
-import { useTheme } from "@react-navigation/native"
 
 type InputItemProps = {
   writeItemToStorage: (newValue: ValueType) => void

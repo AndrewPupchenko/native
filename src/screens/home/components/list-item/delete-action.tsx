@@ -7,7 +7,9 @@ export const DeleteAction = (props: StyleProp<ViewStyle>) => {
   const theme = useTheme()
 
   return (
-    <View style={[styles.delete, { backgroundColor: theme?.colors?.primary }]}>
+    <View
+      style={[styles.delete, { backgroundColor: theme?.colors?.notification }]}
+    >
       <Animated.View style={[props]}>
         <AntDesign
           style={styles.deleteIcon}

@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native"
-import { OutPutValueType } from "@shared/hooks/use-local-storage"
+import { OutPutValueType } from "@shared/provider"
 import { Animated, StyleSheet } from "react-native"
 import { Text } from "react-native-animatable"
 import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler"
