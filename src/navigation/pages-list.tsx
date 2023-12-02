@@ -4,6 +4,8 @@ import { FC } from "react"
 import { Alert, Text, TouchableOpacity } from "react-native"
 import AboutScreen from "../screens/about/about-screen"
 import HomeScreen from "../screens/home/home-screen"
+import { MaterialIcons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 
 const homeHeaderRight = () => {
   const { clearStorage } = useLocalStorage()
@@ -44,10 +46,16 @@ export const PagesList: {
   {
     name: "Checklist",
     component: HomeScreen,
-    options: { headerRight: homeHeaderRight },
+    options: {
+      headerRight: homeHeaderRight,
+      drawerIcon: (props) => <Ionicons name="list-circle" {...props} />,
+    },
   },
   {
     name: "About",
     component: AboutScreen,
+    options: {
+      drawerIcon: (props) => <MaterialIcons name="info-outline" {...props} />,
+    },
   },
 ]
