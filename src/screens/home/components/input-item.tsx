@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native"
-import { ValueType } from "@shared/provider"
+import { ValueType } from "@shared/types"
 import { useCallback } from "react"
 import { StyleSheet, TextInput } from "react-native"
 import { View } from "react-native-animatable"
