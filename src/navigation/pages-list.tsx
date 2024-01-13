@@ -1,14 +1,14 @@
+import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import { DrawerNavigationOptions } from "@react-navigation/drawer"
-import { useLocalStorage } from "@shared/provider"
+import { clearStorage } from "@features/local-storage/local-storage-slice"
 import { FC } from "react"
 import { Alert, Text, TouchableOpacity } from "react-native"
+import { useDispatch } from "react-redux"
 import AboutScreen from "../screens/about/about-screen"
 import HomeScreen from "../screens/home/home-screen"
-import { MaterialIcons } from "@expo/vector-icons"
-import { Ionicons } from "@expo/vector-icons"
 
 const homeHeaderRight = () => {
-  const { clearStorage } = useLocalStorage()
+  const dispatch = useDispatch()
 
   return (
     <TouchableOpacity
@@ -23,7 +23,7 @@ const homeHeaderRight = () => {
             },
             {
               text: "Clear",
-              onPress: clearStorage,
+              onPress: () => dispatch(clearStorage()),
               style: "destructive",
             },
           ],

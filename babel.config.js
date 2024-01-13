@@ -7,7 +7,7 @@ const plugins = [
       root: ["./src/shared"],
       extensions: [".js", ".json"],
       alias: {
-        "@shared": "./src/shared",
+        "@shared": "./src/shared", '@features': "./src/features"
       },
     },
   ],
