@@ -1,10 +1,10 @@
-import { RootState } from "app/store"
 import {
   deleteItem,
   writeItemToStorage,
 } from "@features/local-storage/local-storage-slice"
+import { RootState } from "app/store"
 import { FC } from "react"
-import { FlatList, StyleSheet, View } from "react-native"
+import { FlatList, SafeAreaView, StyleSheet } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import { InputItem } from "./components/input-item"
 import { ListItem } from "./components/list-item"
@@ -14,7 +14,7 @@ export const HomeScreen: FC = () => {
   const dispatch = useDispatch()
 
   return (
-    <View style={styles?.container}>
+    <SafeAreaView style={styles?.container}>
       <FlatList
         style={styles?.list}
         data={list}
@@ -30,7 +30,7 @@ export const HomeScreen: FC = () => {
       <InputItem
         writeItemToStorage={(el) => dispatch(writeItemToStorage(el))}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 

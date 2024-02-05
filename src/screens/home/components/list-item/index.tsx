@@ -1,8 +1,9 @@
 import { useTheme } from "@react-navigation/native"
 import { OutPutValueType } from "@shared/types"
-import { Animated, StyleSheet } from "react-native"
+import { StyleSheet } from "react-native"
 import { Text } from "react-native-animatable"
 import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler"
+import Animated from "react-native-reanimated"
 import { DeleteAction } from "./delete-action"
 
 type ListItemProps = {
