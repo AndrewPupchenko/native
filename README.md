@@ -4,6 +4,8 @@
 
 This repository contains the source code of an application developed using React Native. The project is a simple app that creates and manages a list in the local storage of the device.
 
+## [Download link](https://expo.dev/accounts/andrew_react/projects/UsefulList/builds/e922478e-135b-42cd-8bba-a3ebef5fb1b7)
+
 ## Key Features
 
 - **List Creation:** Add items to the list by providing the necessary information.
